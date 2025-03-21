@@ -3,7 +3,13 @@
     <input [(ngModel)]="featureFlagKey" placeholder="Enter Feature Flag Key" required />
     <button (click)="getFlagStatus()" [disabled]="!featureFlagKey">Get Flag Status</button>
     <label>
-        <input type="checkbox" [disabled]="!featureFlagKey" [(ngModel)]="isFlagEnabled" (change)="toggleFlag()" /> Toggle Flag(If checked means Flag is ON)
+      <mat-slide-toggle 
+        [disabled]="!featureFlagKey" 
+        [(ngModel)]="isFlagEnabled" 
+        (change)="toggleFlag()">
+        {{ isFlagEnabled ? 'ON' : 'OFF' }}
+      </mat-slide-toggle>
+        <!-- <input type="checkbox" [disabled]="!featureFlagKey" [(ngModel)]="isFlagEnabled" (change)="toggleFlag()" /> Toggle Flag(If checked means Flag is ON) -->
     </label>
 
     <!-- <button (click)="deleteFeatureFlag()" [disabled]="!featureFlagKey">Delete Flag</button> -->
@@ -40,8 +46,11 @@
   
     <h3>Add Target</h3>
     <input [(ngModel)]="targetData.values[0]" placeholder="Enter Target Value" required />
-    <button (click)="addTargetToFlag()" [disabled]="!targetData.values[0] || !featureFlagKey">Add Target</button>
-  
+    <button (click)="addTargetToFlag()" [disabled]="!targetData.values[0] || !featureFlagKey">Add Target</button><br>
+    <b>Note: For Add Target - Kindly enter single Target ID (Example: PW-38XXXX7) at one time. Multiple Targets are not allowed.</b>
+
+    <br>
+    
     <h3>Remove Target</h3>
     <input [(ngModel)]="removeTargetValues[0]" placeholder="Enter Target Value to Remove" required />
     <input [(ngModel)]="removeTargetVariationId" placeholder="Enter Variation ID" required />
@@ -50,11 +59,8 @@
     <h3>Clear All Targets</h3>
     <input [(ngModel)]="variationId" placeholder="Enter Variation ID" required />
     <button (click)="clearAllTargets()" [disabled]="!featureFlagKey || !variationId">Clear All Targets</button>
-    <div>To get Variation ID, first get the Flag status and in the response there is "Flag Variation Id" use this one</div>
+    <div><b>To get Variation ID, first get the Flag status and in the response there is "Flag Variation Id" use this one</b></div>
 
     <br>
 
-
-
-    <p>Note: For Add Target - Kindly enter single Target ID (Example: PW-38XXXX7) at one time. Multiple Targets are not allowed.</p>
 </div>
