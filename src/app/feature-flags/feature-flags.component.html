@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>LaunchDarkly Feature Flags</h2>
+  <h2 style="text-align: center;">LaunchDarkly Feature Flags</h2>
   
   <!-- Tab Group -->
   <mat-tab-group  mat-stretch-tabs class="custom-tab-group">
@@ -9,10 +9,11 @@
       <div class="tab-content">
         <h3>Retrieve Feature Flag Status</h3>
         <div class="input-group">
-          <input [(ngModel)]="featureFlagKey" placeholder="Enter Feature Flag Key" required />
+          <input style= "width: 300px;" [(ngModel)]="featureFlagKey" placeholder="Enter Feature Flag Key" required />
           <button (click)="getFlagStatus()" [disabled]="!featureFlagKey">Get Flag Status</button>
        
         <mat-slide-toggle 
+          class="custom-slider"
           [disabled]="!featureFlagKey" 
           [(ngModel)]="isFlagEnabled" 
           (change)="toggleFlag()">
@@ -65,9 +66,9 @@
       <div class="tab-content">
         <h3>Create a New Feature Flag</h3>
         <div class="input-group">
-          <input [(ngModel)]="newFlagData.name" placeholder="Enter Flag Name" required />
-          <input [(ngModel)]="newFlagData.key" placeholder="Enter Flag Key" required />
-          <input [(ngModel)]="newFlagData.description" placeholder="Enter Flag Description" required />
+          <input style= "width: 300px;" [(ngModel)]="newFlagData.name" placeholder="Enter Flag Name" required />
+          <input style= "width: 300px;" [(ngModel)]="newFlagData.key" placeholder="Enter Flag Key" required />
+          <input style= "width: 300px;" [(ngModel)]="newFlagData.description" placeholder="Enter Flag Description" required />
           <button (click)="createFeatureFlag()" [disabled]="!newFlagData.name || !newFlagData.key || !newFlagData.description">Create Flag</button>
         </div>
       </div>
@@ -76,30 +77,31 @@
     <!-- Tab 3: Manage Targets -->
     <mat-tab label="Manage Targets">
       <div class="tab-content">
-        <h3>Manage Targets</h3>
+        <h2>Manage Targets</h2>
         <div class="input-group">
-          <input style= "width: 400px;" [(ngModel)]="targetFeatureFlagKey" placeholder="Enter Feature Flag Key for which targets need change" required />
+          <h4>Feature Flag Key*
+            <input style= "width: 400px;" [(ngModel)]="targetFeatureFlagKey" placeholder="Enter Feature Flag Key for which targets need change" required />
+          </h4>
         </div>
-        <h4>Add Target</h4>
+        <h2>Add Target</h2>
         <div class="input-group">
           <input [(ngModel)]="targetData.values[0]" placeholder="Enter Target Value" required />
           <button (click)="addTargetToFlag()" [disabled]="!targetData.values[0] || !targetFeatureFlagKey">Add Target</button>
         </div>
         <h4>Note: Enter a single Target ID (e.g., PW-38XXXX7) at one time. Multiple Targets are not allowed.</h4>
         
-        <h4>Remove Target</h4>
+        <h2>Remove Target</h2><h4> (To get Variation ID, first get the Flag status and use the "Flag Variation Id" from the response.)</h4>
         <div class="input-group">
-          <input [(ngModel)]="removeTargetValues[0]" placeholder="Enter Target Value to Remove" required />
+          <input style= "width: 200px;" [(ngModel)]="removeTargetValues[0]" placeholder="Enter Target Value to Remove" required />
           <input [(ngModel)]="removeTargetVariationId" placeholder="Enter Variation ID" required />
           <button (click)="removeTarget()" [disabled]="!targetFeatureFlagKey || !removeTargetValues[0] || !removeTargetVariationId">Remove Target</button>
         </div>
 
-        <h4>Clear All Targets</h4>
+        <h2>Clear All Targets</h2>
         <div class="input-group">
           <input [(ngModel)]="variationId" placeholder="Enter Variation ID" required />
           <button (click)="clearAllTargets()" [disabled]="!targetFeatureFlagKey || !variationId">Clear All Targets</button>
         </div>
-        <h4>To get Variation ID, first get the Flag status and use the "Flag Variation Id" from the response.</h4>
       </div>
     </mat-tab>
 

@@ -41,6 +41,7 @@
   }
   
   input {
+    border-radius: 25px;
     margin: 10px;
     padding: 8px;
   }
@@ -82,4 +83,15 @@
   h2, h3, h4 {
     color: #333;
   }
+ 
+  ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: #4caf50 !important; /* Green for ON */
+  }
   
+  ::ng-deep .mat-slide-toggle .mat-slide-toggle-bar {
+    background-color: #ccc !important; /* Gray for OFF */
+  }
+  
+  ::ng-deep .mat-slide-toggle-bar {
+    transition: background-color 0.3s ease-in-out; /* Smooth transition */
+  }

@@ -26,7 +26,10 @@ export class FeatureFlagsComponent {
         this.flagStatus = data;
         this.isFlagEnabled = data.environments.test.on;
       },
-      (error) => (this.flagStatus = false,console.error(error))
+      (error) => {
+        this.isFlagEnabled = false;
+        this.flagStatus = false;
+        console.error(error);}
     );
   }
 
