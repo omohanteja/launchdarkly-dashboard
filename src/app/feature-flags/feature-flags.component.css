@@ -50,7 +50,7 @@
     padding: 10px;
     cursor: pointer;
     font-weight: bold;
-    background-color: #ff5100;
+    background-color: #ff51004f;
   }
   
   table {
@@ -68,7 +68,7 @@
   }
   
   th {
-    background-color: #007bff; /* Header background color (blue) */
+    background-color: #007bffb6; /* Header background color (blue) */
     color: white; /* Header text color (white) */
     padding: 10px; /* Padding for better spacing */
   }

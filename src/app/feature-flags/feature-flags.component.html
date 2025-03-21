@@ -77,11 +77,13 @@
     <mat-tab label="Manage Targets">
       <div class="tab-content">
         <h3>Manage Targets</h3>
-        
+        <div class="input-group">
+          <input style= "width: 400px;" [(ngModel)]="targetFeatureFlagKey" placeholder="Enter Feature Flag Key for which targets need change" required />
+        </div>
         <h4>Add Target</h4>
         <div class="input-group">
           <input [(ngModel)]="targetData.values[0]" placeholder="Enter Target Value" required />
-          <button (click)="addTargetToFlag()" [disabled]="!targetData.values[0] || !featureFlagKey">Add Target</button>
+          <button (click)="addTargetToFlag()" [disabled]="!targetData.values[0] || !targetFeatureFlagKey">Add Target</button>
         </div>
         <h4>Note: Enter a single Target ID (e.g., PW-38XXXX7) at one time. Multiple Targets are not allowed.</h4>
         
@@ -89,13 +91,13 @@
         <div class="input-group">
           <input [(ngModel)]="removeTargetValues[0]" placeholder="Enter Target Value to Remove" required />
           <input [(ngModel)]="removeTargetVariationId" placeholder="Enter Variation ID" required />
-          <button (click)="removeTarget()" [disabled]="!featureFlagKey || !removeTargetValues[0] || !removeTargetVariationId">Remove Target</button>
+          <button (click)="removeTarget()" [disabled]="!targetFeatureFlagKey || !removeTargetValues[0] || !removeTargetVariationId">Remove Target</button>
         </div>
 
         <h4>Clear All Targets</h4>
         <div class="input-group">
           <input [(ngModel)]="variationId" placeholder="Enter Variation ID" required />
-          <button (click)="clearAllTargets()" [disabled]="!featureFlagKey || !variationId">Clear All Targets</button>
+          <button (click)="clearAllTargets()" [disabled]="!targetFeatureFlagKey || !variationId">Clear All Targets</button>
         </div>
         <h4>To get Variation ID, first get the Flag status and use the "Flag Variation Id" from the response.</h4>
       </div>

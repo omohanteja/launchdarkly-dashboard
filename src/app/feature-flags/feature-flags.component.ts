@@ -56,10 +56,10 @@ export class FeatureFlagsComponent {
 
   addTargetToFlag() {
     const patch = { op: 'add', path: '/environments/test/targets/-', value: this.targetData };
-    this.launchDarklyService.addTargetToFlag(this.featureFlagKey, patch).subscribe(
+    this.launchDarklyService.addTargetToFlag(this.targetFeatureFlagKey, patch).subscribe(
       () => {alert('Target added successfully!');
         this.targetData = { variation: 0, values: [''] };
-        this.getFlagStatus();
+        this.targetFeatureFlagKey = '';
       },
       (error) => console.error(error)
     );
@@ -70,7 +70,7 @@ export class FeatureFlagsComponent {
       () => {
         alert(this.removeTargetValues + ' Target removed successfully!');
         this.removeTargetVariationId = '';
-        this.getFlagStatus();
+        this.targetFeatureFlagKey = '';
       },
       (error) => console.error(error)
     );
@@ -81,7 +81,7 @@ export class FeatureFlagsComponent {
       () => {
         alert('All targets cleared successfully!');
         this.variationId = '';
-        this.getFlagStatus();
+        this.targetFeatureFlagKey = '';
       },
       (error) => console.error(error)
     );
