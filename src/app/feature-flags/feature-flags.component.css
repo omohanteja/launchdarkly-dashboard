@@ -1,29 +1,85 @@
-.container {
-    max-width: 800px;
-    margin: auto;
-    text-align: center;
+  .custom-tab-group {
+    background-color: #007bff41; /* Set the tab background color */
+    color: white;
   }
+
+  .container {
+    margin: 20px;
+  }
+  .mat-tab-label {
+    background-color: #1277e3e2; /* Unselected tab background color */
+    color: white; /* Unselected tab text color */
+    padding: 10px;
+    border-radius: 4px;
+    margin-right: 4px;
+  }
+  
+  /* Style for the active (selected) tab */
+  .mat-tab-label-active {
+    background-color: #0056b3; /* Selected tab background color */
+    color: #f9f9f9; /* Selected tab text color */
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for emphasis */
+    border: 2px solid #003f7f; /* Optional: Add border for selected tab */
+  }
+  
+  /* Optional: Add hover effects to tabs */
+  .mat-tab-label:hover {
+    background-color: #0066cc; /* Slightly darker shade on hover */
+    cursor: pointer;
+  }
+
+  .tab-content {
+    padding: 15px;
+    background-color: #f0f4f8;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
   input {
     margin: 10px;
     padding: 8px;
   }
   button {
     margin: 5px;
+    border-radius: 25px; 
     padding: 10px;
     cursor: pointer;
+    font-weight: bold;
+    background-color: #ff5100;
   }
+  
   table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
     width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #ffffff; 
   }
   
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+  table, th, td {
+    border: 1px solid #0f0101;
+  }
+  table, th, td {
+    border: 1px solid #ccc; /* Light gray border for clarity */
   }
   
-  tr:nth-child(odd) {
-    background-color: #dddddd;
+  th {
+    background-color: #007bff; /* Header background color (blue) */
+    color: white; /* Header text color (white) */
+    padding: 10px; /* Padding for better spacing */
   }
+  
+  td {
+    background-color: #f9f9f9; /* Light gray for table cells */
+    color: #333; /* Text color for content */
+    padding: 8px; /* Padding for better readability */
+  }
+  
+  h2, h3, h4 {
+    color: #333;
+  }
+  

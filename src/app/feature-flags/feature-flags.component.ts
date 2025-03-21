@@ -16,6 +16,7 @@ export class FeatureFlagsComponent {
   targetData = { variation: 0, values: [''] };
   removeTargetValues = [''];
   isFlagEnabled: boolean = false;
+  targetFeatureFlagKey: string = '';
 
   constructor(private launchDarklyService: LaunchdarklyService) {}
 
@@ -32,10 +33,14 @@ export class FeatureFlagsComponent {
   toggleFlag() {
     this.launchDarklyService.updateFlag(this.featureFlagKey, this.isFlagEnabled).subscribe(
       () => {
-        alert('Flag toggled successfully!');
+        alert(this.featureFlagKey + 'Flag toggled successfully!');
         this.getFlagStatus();
       },
-      (error) => console.error(error)
+      (error) => {
+        this.isFlagEnabled = false;
+        console.error(error);
+        alert('Invalid Flag. Kindly check the flag created or not. If not create the flag first!');
+      }
     );
   }
 
