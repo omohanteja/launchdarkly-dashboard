@@ -7,7 +7,7 @@
     margin: 20px;
   }
   .mat-tab-label {
-    background-color: #1277e3e2; /* Unselected tab background color */
+    background-color: #032a54f3; /* Unselected tab background color */
     color: white; /* Unselected tab text color */
     padding: 10px;
     border-radius: 4px;
@@ -16,7 +16,7 @@
   
   /* Style for the active (selected) tab */
   .mat-tab-label-active {
-    background-color: #0056b3; /* Selected tab background color */
+    background-color: #063f7de1; /* Selected tab background color */
     color: #f9f9f9; /* Selected tab text color */
     font-weight: bold;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for emphasis */
