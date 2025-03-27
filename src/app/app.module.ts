@@ -7,10 +7,11 @@ import { LaunchdarklyService } from './launchdarkly.service';
 import { FeatureFlagsComponent } from './feature-flags/feature-flags.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent, FeatureFlagsComponent],
-  imports: [BrowserModule, HttpClientModule, FormsModule, MatSlideToggleModule, MatTabGroup, MatTab],
+  imports: [BrowserModule, HttpClientModule, FormsModule, MatSlideToggleModule, MatTabGroup, MatTab, MatProgressSpinnerModule],
   providers: [LaunchdarklyService],
   bootstrap: [AppComponent],
 })

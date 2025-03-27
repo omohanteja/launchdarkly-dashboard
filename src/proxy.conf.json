@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://app.launchdarkly.com/",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

@@ -10,34 +10,43 @@
         <h3>Retrieve Feature Flag Status</h3>
         <div class="input-group">
           <input style= "width: 300px;" [(ngModel)]="featureFlagKey" placeholder="Enter Feature Flag Key" required />
-          <button (click)="getFlagStatus()" [disabled]="!featureFlagKey">Get Flag Status</button>
+          <button (click)="getFlagStatus()" [disabled]="!featureFlagKey || isLoading" >
+            <span *ngIf="!isLoading">Get Flag Status</span>
+            <div *ngIf="isLoading" class="loader"></div>
+          </button>
        
+        <span> {{ isFlagEnabled ? 'Flag is Enabled' : 'Flag is Disabled' }} </span>
         <mat-slide-toggle 
           class="custom-slider"
           [disabled]="!featureFlagKey" 
           [(ngModel)]="isFlagEnabled" 
           (change)="toggleFlag()">
-          {{ isFlagEnabled ? 'ON' : 'OFF' }}
         </mat-slide-toggle>
+
+        <span>&nbsp; &nbsp; &nbsp;</span>
+        <span>{{ flagDefaultRule ? 'Default Rule is Enabled' : 'Default Rule is Disabled' }}</span>
+        <mat-slide-toggle 
+          class="custom-slider"
+          [disabled]="!featureFlagKey" 
+          [(ngModel)]="flagDefaultRule" 
+          (change)="toggleDefaultRule()">
+        </mat-slide-toggle>
+
       </div>
         <div *ngIf="flagStatus">
-          <h4>Flag Details:</h4>
+          <h3>Flag Key : {{ flagStatus.key }}</h3> 
+          <h4>Test Environment Flag Details:</h4>
           <table>
             <thead>
               <tr>
-                <th>Flag Key</th>
                 <th>Test Envitonment - Flag Status</th>
-                <th>Flag Variation Id</th>
                 <th>Test Envitonment- Targets</th>
-                <th>PROD Envitonment - Flag Status</th>
-                <th>PROD Envitonment- Targets</th>
+                <th>Test Default Rule</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{{ flagStatus.key }}</td>
-                <td>{{ flagStatus.environments.test.on ? 'ON' : 'OFF' }}</td>
-                <td>{{ flagStatus.variations[0]._id }}</td>
+                <td [ngClass]="flagStatus.environments.test.on? 'green-highlight' : 'red-highlight'">{{ flagStatus.environments.test.on ? 'ON' : 'OFF' }}</td>
                 <td>
                   <div *ngFor="let item of flagStatus.environments.test.targets">
                     <div *ngFor="let person of item.values">
@@ -45,7 +54,25 @@
                     </div>
                   </div>
                 </td>
-                <td>{{ flagStatus.environments.production.on ? 'ON' : 'OFF' }}</td>
+                <td>{{ flagStatus.environments.test.on ? (flagStatus.environments.test.fallthrough.variation == 0 ? 'True' : 'False') : ''}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div *ngIf="flagStatus">
+          <h4>Prod Environment Flag Details:</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>PROD Envitonment - Flag Status</th>
+                <th>PROD Envitonment- Targets</th>
+                <th>PROD Default Rule</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td [ngClass]="flagStatus.environments.production.on? 'green-highlight' : 'red-highlight'">{{ flagStatus.environments.production.on ? 'ON' : 'OFF' }}</td>
                 <td>
                   <div *ngFor="let item of flagStatus.environments.production.targets">
                     <div *ngFor="let person of item.values">
@@ -53,6 +80,7 @@
                     </div>
                   </div>
                 </td>
+                <td>{{ flagStatus.environments.production.on ? (flagStatus.environments.production.fallthrough.variation == 0 ? 'True' : 'False') : '' }}</td>
               </tr>
             </tbody>
           </table>
@@ -64,12 +92,16 @@
     <!-- Tab 2: Create Feature Flag -->
     <mat-tab label="Create Feature Flag">
       <div class="tab-content">
-        <h3>Create a New Feature Flag</h3>
+        <h3>Create a New Feature Flag </h3> <span> (By Default After Flag Creation, Flag will be OFF/Disabled.)</span>
         <div class="input-group">
           <input style= "width: 300px;" [(ngModel)]="newFlagData.name" placeholder="Enter Flag Name" required />
           <input style= "width: 300px;" [(ngModel)]="newFlagData.key" placeholder="Enter Flag Key" required />
           <input style= "width: 300px;" [(ngModel)]="newFlagData.description" placeholder="Enter Flag Description" required />
-          <button (click)="createFeatureFlag()" [disabled]="!newFlagData.name || !newFlagData.key || !newFlagData.description">Create Flag</button>
+          <button (click)="createFeatureFlag()" 
+              [disabled]="!newFlagData.name || !newFlagData.key || !newFlagData.description || isLoading">
+            <span *ngIf="!isLoading">Create Flag</span>
+            <div *ngIf="isLoading" class="loader"></div>
+        </button>
         </div>
       </div>
     </mat-tab>
@@ -81,27 +113,23 @@
         <div class="input-group">
           <h4>Feature Flag Key*
             <input style= "width: 400px;" [(ngModel)]="targetFeatureFlagKey" placeholder="Enter Feature Flag Key for which targets need change" required />
-          </h4>
-        </div>
-        <h2>Add Target</h2>
-        <div class="input-group">
-          <input [(ngModel)]="targetData.values[0]" placeholder="Enter Target Value" required />
-          <button (click)="addTargetToFlag()" [disabled]="!targetData.values[0] || !targetFeatureFlagKey">Add Target</button>
-        </div>
-        <h4>Note: Enter a single Target ID (e.g., PW-38XXXX7) at one time. Multiple Targets are not allowed.</h4>
-        
-        <h2>Remove Target</h2><h4> (To get Variation ID, first get the Flag status and use the "Flag Variation Id" from the response.)</h4>
-        <div class="input-group">
-          <input style= "width: 200px;" [(ngModel)]="removeTargetValues[0]" placeholder="Enter Target Value to Remove" required />
-          <input [(ngModel)]="removeTargetVariationId" placeholder="Enter Variation ID" required />
-          <button (click)="removeTarget()" [disabled]="!targetFeatureFlagKey || !removeTargetValues[0] || !removeTargetVariationId">Remove Target</button>
+          <button (click)="clearAllTargets()" [disabled]="!targetFeatureFlagKey">Clear All Targets</button>
+        </h4>
         </div>
 
-        <h2>Clear All Targets</h2>
+        <h2>Add Target</h2>
         <div class="input-group">
-          <input [(ngModel)]="variationId" placeholder="Enter Variation ID" required />
-          <button (click)="clearAllTargets()" [disabled]="!targetFeatureFlagKey || !variationId">Clear All Targets</button>
+          <input [(ngModel)]="targetData" placeholder="Enter Target Value" required />
+          <button (click)="addTargetToFlag()" [disabled]="!targetData || !targetFeatureFlagKey">Add Target</button>
         </div>
+        <span>Note: Enter a single Target ID (e.g., PW-38XXXX7) at one time. Multiple Targets are not allowed.</span>
+        
+        <h2>Remove Target</h2><span> (Kindly check the Default rule true/false after update.)</span>
+        <div class="input-group">
+          <input style= "width: 200px;" [(ngModel)]="removeTargetValues" placeholder="Enter Target Value to Remove" required />
+          <button (click)="removeTarget()" [disabled]="!targetFeatureFlagKey || !removeTargetValues">Remove Target</button>
+        </div>
+
       </div>
     </mat-tab>
 

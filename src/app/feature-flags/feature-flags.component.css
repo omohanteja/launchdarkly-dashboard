@@ -54,6 +54,11 @@
     background-color: #ff51004f;
   }
   
+  button:disabled {
+    background-color: #a7a7a7;
+    cursor: not-allowed;
+  }
+  
   table {
     width: 100%;
     border-collapse: collapse;
@@ -63,6 +68,7 @@
   
   table, th, td {
     border: 1px solid #0f0101;
+    text-align: center;
   }
   table, th, td {
     border: 1px solid #ccc; /* Light gray border for clarity */
@@ -80,7 +86,7 @@
     padding: 8px; /* Padding for better readability */
   }
   
-  h2, h3, h4 {
+  h2, h3, h4, span {
     color: #333;
   }
  
@@ -94,4 +100,33 @@
   
   ::ng-deep .mat-slide-toggle-bar {
     transition: background-color 0.3s ease-in-out; /* Smooth transition */
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3; /* Light gray background */
+    border-top: 4px solid #007bff; /* Blue spinner color */
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite; /* Continuous spinning animation */
+    display: inline-block;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .green-highlight {
+    background-color: green;
+    color: white; /* Optional: For better text contrast */
+  }
+  
+  .red-highlight {
+    background-color: red;
+    color: white; /* Optional: For better text contrast */
   }
