@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LaunchdarklyService } from '../launchdarkly.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feature-flags',
@@ -22,7 +23,7 @@ export class FeatureFlagsComponent {
   trueVariationId: string = '';
   falseVariationId: string = '';
 
-  constructor(private launchDarklyService: LaunchdarklyService) {}
+  constructor(private launchDarklyService: LaunchdarklyService, private router: Router) {}
 
   getFlagStatus() {
     this.isLoading = true; 
@@ -168,5 +169,10 @@ export class FeatureFlagsComponent {
       () => alert('Feature flag deleted successfully!'),
       (error) => console.error(error)
     );
+  }
+
+  logout(): void {
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/login']);
   }
 }

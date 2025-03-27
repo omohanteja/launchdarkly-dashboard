@@ -5,6 +5,7 @@
 
   .container {
     margin: 20px;
+    background: linear-gradient(135deg, #00a4eab3, #d4dfe4); 
   }
   .mat-tab-label {
     background-color: #032a54f3; /* Unselected tab background color */
@@ -31,7 +32,7 @@
 
   .tab-content {
     padding: 15px;
-    background-color: #f0f4f8;
+    background: linear-gradient(135deg, #9dcce1b3, #d4dfe4); 
     border: 1px solid #ccc;
     border-radius: 8px;
   }
@@ -41,6 +42,7 @@
   }
   
   input {
+    background: linear-gradient(135deg, #bbc2c5b3, #d4dfe4); 
     border-radius: 25px;
     margin: 10px;
     padding: 8px;
@@ -51,11 +53,11 @@
     padding: 10px;
     cursor: pointer;
     font-weight: bold;
-    background-color: #ff51004f;
+    background-color: #c10808;
   }
   
   button:disabled {
-    background-color: #a7a7a7;
+    background-color: #1202024f;
     cursor: not-allowed;
   }
   
