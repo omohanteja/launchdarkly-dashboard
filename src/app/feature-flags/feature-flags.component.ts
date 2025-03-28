@@ -38,7 +38,7 @@ export class FeatureFlagsComponent {
       },
       (error) => {
         console.error(error);
-        alert("Try again. Error while getting flag status - " + this.featureFlagKey);
+        alert('Invalid Flag. Kindly check the flag created or not. If not create the flag first!');
         this.trueVariationId = '';
         this.flagDefaultRule = false;
         this.isFlagEnabled = false;
@@ -95,12 +95,12 @@ export class FeatureFlagsComponent {
   }
 
   addTargetToFlag() {
-    this.launchDarklyService.getFlagStatus(this.featureFlagKey).subscribe(
+    this.launchDarklyService.getFlagStatus(this.targetFeatureFlagKey).subscribe(
       (data) => {
         if(!data.environments.test.on){
           alert('Flag is Not Enabled. Kindly enable the flag first!');
         } else {
-          this.launchDarklyService.addTargetToFlag(this.featureFlagKey, this.targetData, data.variations[0]._id, data.variations[1]._id).subscribe(
+          this.launchDarklyService.addTargetToFlag(this.targetFeatureFlagKey, this.targetData, data.variations[0]._id, data.variations[1]._id).subscribe(
             () => {
               alert('Target added successfully!');
               this.targetData = '';
@@ -113,18 +113,18 @@ export class FeatureFlagsComponent {
       },
       (error) => {
         console.error(error);
-        alert('Invalid Flag. Kindly check the flag created or not. If not create the flag first!');
+        alert('Get call Invalid Flag. Kindly check the flag created or not. If not create the flag first!');
       }
     ); 
   }
 
   removeTarget() {
-    this.launchDarklyService.getFlagStatus(this.featureFlagKey).subscribe(
+    this.launchDarklyService.getFlagStatus(this.targetFeatureFlagKey).subscribe(
       (data) => {
         if(!data.environments.test.on){
           alert('Flag is Not Enabled. Kindly enable the flag first!');
         } else {
-          this.launchDarklyService.removeTarget(this.featureFlagKey, this.removeTargetValues, data.variations[0]._id).subscribe(
+          this.launchDarklyService.removeTarget(this.targetFeatureFlagKey, this.removeTargetValues, data.variations[0]._id).subscribe(
             () => {
               alert('Target removed successfully!');
               this.removeTargetValues = '';
@@ -144,9 +144,9 @@ export class FeatureFlagsComponent {
   }
 
   clearAllTargets() {
-    this.launchDarklyService.getFlagStatus(this.featureFlagKey).subscribe(
+    this.launchDarklyService.getFlagStatus(this.targetFeatureFlagKey).subscribe(
       (data) => {
-        this.launchDarklyService.clearAllTargets(this.featureFlagKey, data.variations[0]._id, data.variations[1]._id).subscribe(
+        this.launchDarklyService.clearAllTargets(this.targetFeatureFlagKey, data.variations[0]._id, data.variations[1]._id).subscribe(
           () => {
             alert('All targets cleared successfully!');
             this.targetFeatureFlagKey = '';
@@ -173,6 +173,8 @@ export class FeatureFlagsComponent {
 
   logout(): void {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('authTokenExpiry');
     this.router.navigate(['/login']);
   }
+
 }

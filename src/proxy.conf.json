@@ -1,7 +1,8 @@
 {
     "/api/*": {
-        "target": "https://app.launchdarkly.com/",
-        "secure": false,
-        "logLevel": "debug"
+        "target": "https://app.launchdarkly.com/api/v2/flags/property-ware/",
+        "secure": true,
+        "logLevel": "debug",
+        "changeOrigin": true
     }
 }

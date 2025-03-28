@@ -14,12 +14,19 @@ export class LaunchdarklyService {
     'Authorization': 'api-2b78bb16-9d30-4dd7-8a54-29fbc1f61daf',
     //'Authorization': 'api-fd828d8d-efa8-4cf7-906f-dfe6fdc4a49f',
     'Content-Type': 'application/json'
+    // 'Access-Control-Allow-Origin':'*',
+    // 'Access-Control-Allow-Headers': 'Accept, Content-Type, Content-Length, Accept-Encoding, Authorization',
+    // 'Access-Control-Allow-Methods': 'OPTIONS, GET, DELETE, PATCH'
+
   });
 
   private semanticHeaders = new HttpHeaders({
     //'Authorization': 'api-fd828d8d-efa8-4cf7-906f-dfe6fdc4a49f',
     'Authorization': 'api-2b78bb16-9d30-4dd7-8a54-29fbc1f61daf',
     'Content-Type': 'application/json; domain-model=launchdarkly.semanticpatch'
+    // 'Access-Control-Allow-Origin':'*',
+    // 'Access-Control-Allow-Headers': 'Accept, Content-Type, Content-Length, Accept-Encoding, Authorization',
+    // 'Access-Control-Allow-Methods': 'OPTIONS, GET, DELETE, PATCH'
   });
 
   constructor(private http: HttpClient) {}
